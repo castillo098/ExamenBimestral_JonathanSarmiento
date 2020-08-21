@@ -77,8 +77,28 @@ public class ClienteFacadeREST extends AbstractFacade<Cliente> {
     public String Crear(@FormParam("id_cliente") String id_cliente, @FormParam("nombre") String nombre, @FormParam("apellido") String apellido, @FormParam("cedula") String cedula,
             @FormParam("edad") String edad, @FormParam("provincia_residencia") String provincia_residencia, @FormParam("vehiculo_compro") String vehiculo_compro) {
 
-        Cliente cl = new Cliente(id_cliente, nombre, apellido, cedula, edad, provincia_residencia, vehiculo_compro);
+        Cliente cl = new Cliente(id_cliente, nombre, apellido, cedula, apellido, edad, provincia_residencia, vehiculo_compro);
         return "datos creados";
+    }
+
+    @POST
+    @Path("editar")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON})
+    public String Editar(@FormParam("id_cliente") String id_cliente, @FormParam("nombre") String nombre, @FormParam("apellido") String apellido, @FormParam("cedula") String cedula,
+            @FormParam("edad") String edad, @FormParam("provincia_residencia") String provincia_residencia, @FormParam("vehiculo_compro") String vehiculo_compro) {
+        Cliente c = super.find(id_cliente);
+        c.setNombre(nombre);
+        c.setApellido(apellido);
+        c.setCedula(cedula);
+        c.setEdad(edad);
+        c.setProvinciaResidencia(provincia_residencia);
+        c.setVehiculoCompro(vehiculo_compro);
+        super.edit(c);
+        if (id_cliente == null) {
+            return "no se encauntran el valor";
+        } else {
+            return "datos modificacados";
+        }
     }
 
     @GET

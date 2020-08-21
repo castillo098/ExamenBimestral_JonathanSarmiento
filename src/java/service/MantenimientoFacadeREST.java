@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -69,6 +70,36 @@ public class MantenimientoFacadeREST extends AbstractFacade<Mantenimiento> {
         return super.findAll();
     }
 
+    @POST
+    @Path("create")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON})
+    public String Crear(@FormParam("id_mantenimiento") String id_mantenimiento, @FormParam("vehiculo") int vehiculo, @FormParam("cliente") String cliente,
+            @FormParam("fecha") String fecha, @FormParam("descripcion") String descripcion, @FormParam("kilometraje") String kilometraje) {
+
+        Mantenimiento m = new Mantenimiento(id_mantenimiento, vehiculo, cliente, fecha, descripcion, kilometraje);
+        return "datos creados";
+
+    }
+
+    @POST
+    @Path("editar")
+    public String Editar(@FormParam("id_mantenimiento") String id_mantenimiento, @FormParam("vehiculo") int vehiculo, @FormParam("cliente") String cliente,
+            @FormParam("fecha") String fecha, @FormParam("descripcion") String descripcion, @FormParam("kilometraje") String kilometraje) {
+
+        Mantenimiento ma = super.find(id_mantenimiento);
+        ma.setVehiculo(vehiculo);
+        ma.setCliente(cliente);
+        ma.setFecha(fecha);
+        ma.setDescripcion(descripcion);
+        ma.setKilometraje(kilometraje);
+        super.edit(ma);
+        if (id_mantenimiento == null) {
+            return "no se encauntran el valor";
+        } else {
+            return "datos modificacados";
+        }
+    }
+
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -87,5 +118,5 @@ public class MantenimientoFacadeREST extends AbstractFacade<Mantenimiento> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
