@@ -47,7 +47,7 @@ public class Vehiculos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "a\u00f1o")
+    @Column(name = "año")
     private String año;
     @Basic(optional = false)
     @NotNull
@@ -200,5 +200,5 @@ public class Vehiculos implements Serializable {
     public String toString() {
         return "modelo.Vehiculos[ idVehiculo=" + idVehiculo + " ]";
     }
-    
+
 }

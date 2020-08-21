@@ -95,7 +95,7 @@ public class ClienteFacadeREST extends AbstractFacade<Cliente> {
         c.setVehiculoCompro(vehiculo_compro);
         super.edit(c);
         if (id_cliente == null) {
-            return "no se encauntran el valor";
+            return "no se encuentra el valor";
         } else {
             return "datos modificacados";
         }

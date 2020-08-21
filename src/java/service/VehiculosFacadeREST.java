@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -64,9 +65,45 @@ public class VehiculosFacadeREST extends AbstractFacade<Vehiculos> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON})
     public List<Vehiculos> findAll() {
         return super.findAll();
+    }
+
+    @POST
+    @Path("create")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON})
+    public String Crear(@FormParam("id_vehiculo") String id_vehiculo, @FormParam("año") String año, @FormParam("num_pasajeros") String num_pasajeros, @FormParam("modelo") String modelo,
+            @FormParam("marca") String marca, @FormParam("cilindraje") String cilindraje, @FormParam("pais_fabricacion") String pais_fabricacion, @FormParam("placa") String placa,
+            @FormParam("concesionario_pertenece") String concesionario_pertenece) {
+        Vehiculos v = new Vehiculos(id_vehiculo, año, num_pasajeros, modelo, marca, cilindraje, pais_fabricacion, placa, concesionario_pertenece);
+
+        return "datos ingresados";
+
+    }
+
+    @POST
+    @Path("editar")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON})
+    public String Editar(@FormParam("id_vehiculo") String id_vehiculo, @FormParam("año") String año, @FormParam("num_pasajeros") String num_pasajeros, @FormParam("modelo") String modelo,
+            @FormParam("marca") String marca, @FormParam("cilindraje") String cilindraje, @FormParam("pais_fabricacion") String pais_fabricacion, @FormParam("placa") String placa,
+            @FormParam("concesionario_pertenece") String concesionario_pertenece) {
+        Vehiculos ve = super.find(id_vehiculo);
+        ve.setAño(año);
+        ve.setNumPasajeros(num_pasajeros);
+        ve.setModelo(modelo);
+        ve.setMarca(marca);
+        ve.setCilindraje(cilindraje);
+        ve.setPaisFabricacion(pais_fabricacion);
+        ve.setPlaca(placa);
+        ve.setConcesionarioPertenece(concesionario_pertenece);
+        super.edit(ve);
+        if (id_vehiculo == null) {
+            return "no se encuentra el valor";
+        } else {
+            return "datos modificacados";
+        }
+
     }
 
     @GET
@@ -87,5 +124,5 @@ public class VehiculosFacadeREST extends AbstractFacade<Vehiculos> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

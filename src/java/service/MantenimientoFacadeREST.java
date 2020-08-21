@@ -94,7 +94,7 @@ public class MantenimientoFacadeREST extends AbstractFacade<Mantenimiento> {
         ma.setKilometraje(kilometraje);
         super.edit(ma);
         if (id_mantenimiento == null) {
-            return "no se encauntran el valor";
+            return "no se encuentra el valor";
         } else {
             return "datos modificacados";
         }
