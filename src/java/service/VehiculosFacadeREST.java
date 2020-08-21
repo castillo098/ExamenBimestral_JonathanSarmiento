@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -104,6 +105,25 @@ public class VehiculosFacadeREST extends AbstractFacade<Vehiculos> {
             return "datos modificacados";
         }
 
+    }
+
+    @POST
+    @Path("numeroPasajeros")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON})
+    public List<Vehiculos> Pasajeros(@FormParam("num_pasajeros") String num_pasajeros) {
+        TypedQuery consulte = getEntityManager().createQuery("SELECT v FROM Vehiculos v WHERE v.numPasajeros = :numPasajeros", Vehiculos.class);
+        consulte.setParameter("num_pasajeros", num_pasajeros);
+        return consulte.getResultList();
+
+    }
+
+    @POST
+    @Path("Concesionario")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON})
+    public List<Vehiculos> Concesionario(@FormParam("concesionario_pertenece") String concesionario_pertenece) {
+        TypedQuery consulte = getEntityManager().createQuery("SELECT v FROM Vehiculos v WHERE v.concesionarioPertenece = :concesionarioPertenece", Vehiculos.class);
+        consulte.setParameter("concesionario_pertenece", concesionario_pertenece);
+        return consulte.getResultList();
     }
 
     @GET

@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Vehiculos.findAll", query = "SELECT v FROM Vehiculos v")
     , @NamedQuery(name = "Vehiculos.findByIdVehiculo", query = "SELECT v FROM Vehiculos v WHERE v.idVehiculo = :idVehiculo")
-    , @NamedQuery(name = "Vehiculos.findByA\u00f1o", query = "SELECT v FROM Vehiculos v WHERE v.a\u00f1o = :a\u00f1o")
+    , @NamedQuery(name = "Vehiculos.findByAño", query = "SELECT v FROM Vehiculos v WHERE v.añoo = :año")
     , @NamedQuery(name = "Vehiculos.findByNumPasajeros", query = "SELECT v FROM Vehiculos v WHERE v.numPasajeros = :numPasajeros")
     , @NamedQuery(name = "Vehiculos.findByModelo", query = "SELECT v FROM Vehiculos v WHERE v.modelo = :modelo")
     , @NamedQuery(name = "Vehiculos.findByMarca", query = "SELECT v FROM Vehiculos v WHERE v.marca = :marca")
